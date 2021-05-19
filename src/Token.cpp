@@ -33,12 +33,12 @@ void Token::setValue(string s)
 
 void Token::makeToken(int begin, int end, std::vector<char>& programBuffer,  int lastFiniteState)
 {
-	string value = "";
+	string current_value = "";
 	for (int i = begin; i < end; i++)
 	{
-		value += programBuffer[i];
+		current_value += programBuffer[i];
 	}
-	value = value;
+	value = current_value;
 	tokenType = FiniteStateMachine::getTokenType(lastFiniteState);
 }
 

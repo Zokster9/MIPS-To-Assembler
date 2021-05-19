@@ -63,6 +63,11 @@ public:
 	 */
 	void printTokenValue();
 
+	/**
+	 * Helper function to get string representation of token type
+	 */
+	std::string tokenTypeToString(TokenType t);
+
 private:
 	/**
 	 * Type of the token - as enumeration (defined in common.h)
@@ -73,11 +78,6 @@ private:
 	 * Value of the token - as string
 	 */
 	std::string value;
-	
-	/**
-	 * Helper function to get string representation of token type
-	 */
-	std::string tokenTypeToString(TokenType t);
 };
 
 #endif
