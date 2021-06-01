@@ -11,7 +11,8 @@ class InterferenceGraph
 public:
 	InterferenceGraph() {}
 
-	void set_matrix(std::vector<std::vector<int>> matrix);
+	std::vector<std::vector<int>>& get_matrix();
+	Variables* get_variables();
 	void set_variables(Variables* variables);
 	void add_matrix_row(vector<int>& row);
 

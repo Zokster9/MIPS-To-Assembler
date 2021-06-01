@@ -50,6 +50,8 @@ void push_back_var(Variables& vars, Variable* var);
 
 int get_num_reg_vars(Variables& vars);
 
+Variable* get_variable(int position, Variables* vars);
+
 Variable* get_variable(std::string name, Variables& vars);
 
 

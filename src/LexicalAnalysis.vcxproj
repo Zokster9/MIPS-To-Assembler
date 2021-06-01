@@ -96,6 +96,7 @@
     <ClCompile Include="LexicalAnalysis.cpp" />
     <ClCompile Include="LivenessAnalysis.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Simplification.cpp" />
     <ClCompile Include="SyntaxAnalysis.cpp" />
     <ClCompile Include="Token.cpp" />
   </ItemGroup>

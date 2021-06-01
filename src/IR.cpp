@@ -70,6 +70,16 @@ int get_num_reg_vars(Variables& vars)
 	return counter;
 }
 
+Variable* get_variable(int position, Variables* vars)
+{
+	Variables::const_iterator it;
+	for (it = vars->begin(); it != vars->end(); it++)
+	{
+		if ((*it)->get_position() == position)
+			return (*it);
+	}
+}
+
 Variable* get_variable(std::string name, Variables& vars)
 {
 	Variables::const_iterator it;

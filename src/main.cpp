@@ -7,6 +7,7 @@
 #include "InstructionSelection.h"
 #include "LivenessAnalysis.h"
 #include "InterferenceGraph.h"
+#include "Simplification.h"
 
 using namespace std;
 
@@ -62,6 +63,10 @@ int main()
 		build_interference_graph(interference_graph, instructions, get_num_reg_vars(variables));
 
 		interference_graph.printInterferenceMatrix();
+
+		stack<Variable*> stack;
+
+		do_simplification(&interference_graph, &stack, __REG_NUMBER__);
 	}
 	catch (runtime_error e)
 	{

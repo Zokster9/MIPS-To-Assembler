@@ -1,9 +1,14 @@
 #include "InterferenceGraph.h"
 #include <iostream>
 
-void InterferenceGraph::set_matrix(std::vector<std::vector<int>> matrix)
+std::vector<std::vector<int>>& InterferenceGraph::get_matrix()
 {
-	m_matrix = matrix;
+	return m_matrix;
+}
+
+Variables* InterferenceGraph::get_variables()
+{
+	return m_variables;
 }
 
 void InterferenceGraph::set_variables(Variables* variables)
