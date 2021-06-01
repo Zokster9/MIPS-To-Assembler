@@ -24,9 +24,9 @@ public:
 	bool operator==(const Variable* var);
 	void set_position(int position);
 	void set_assignment(Regs& reg);
-	std::string get_name();
+	std::string get_name() const;
 	VariableType get_type();
-	int get_position();
+	int get_position() const;
 
 private:
 	VariableType m_type;
@@ -47,6 +47,8 @@ bool variable_exists(Variable* var, Variables& vars);
 bool variable_exists(std::string name, Variables& vars);
 
 void push_back_var(Variables& vars, Variable* var);
+
+int get_num_reg_vars(Variables& vars);
 
 Variable* get_variable(std::string name, Variables& vars);
 

@@ -42,6 +42,12 @@
     <ClInclude Include="LivenessAnalysis.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="InterferenceGraph.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Simplification.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FiniteStateMachine.cpp">
@@ -66,6 +72,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="LivenessAnalysis.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="InterferenceGraph.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

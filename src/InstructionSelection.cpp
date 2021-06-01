@@ -356,7 +356,7 @@ void add_SW_instruction(Instructions& instructions, Variables& variables, TokenL
 
 	it++;
 
-	add_variable_to_instruction((*it).getValue(), variables, vars_dst, position);
+	add_variable_to_instruction((*it).getValue(), variables, vars_src, position);
 
 	it++;
 	it++;

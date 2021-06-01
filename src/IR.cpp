@@ -15,7 +15,7 @@ void Variable::set_assignment(Regs& reg)
 	m_assignment = reg;
 }
 
-std::string Variable::get_name()
+std::string Variable::get_name() const
 {
 	return m_name;
 }
@@ -25,7 +25,7 @@ Variable::VariableType Variable::get_type()
 	return m_type;
 }
 
-int Variable::get_position()
+int Variable::get_position() const
 {
 	return m_position;
 }
@@ -56,6 +56,18 @@ void push_back_var(Variables& vars, Variable* var)
 {
 	if (!variable_exists(var, vars))
 		vars.push_back(var);
+}
+
+int get_num_reg_vars(Variables& vars)
+{
+	Variables::const_iterator it;
+	int counter = 0;
+	for (it = vars.begin(); it != vars.end(); it++)
+	{
+		if ((*it)->get_type() == Variable::REG_VAR)
+			counter++;
+	}
+	return counter;
 }
 
 Variable* get_variable(std::string name, Variables& vars)

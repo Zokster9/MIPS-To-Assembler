@@ -6,6 +6,7 @@
 #include "IR.h"
 #include "InstructionSelection.h"
 #include "LivenessAnalysis.h"
+#include "InterferenceGraph.h"
 
 using namespace std;
 
@@ -55,6 +56,12 @@ int main()
 		fill_instruction_list(instructions, variables, lex.getTokenList());
 
 		livenessAnalysis(instructions);
+
+		InterferenceGraph interference_graph;
+
+		build_interference_graph(interference_graph, instructions, get_num_reg_vars(variables));
+
+		interference_graph.printInterferenceMatrix();
 	}
 	catch (runtime_error e)
 	{
