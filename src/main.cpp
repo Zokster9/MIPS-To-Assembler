@@ -3,6 +3,9 @@
 
 #include "LexicalAnalysis.h"
 #include "SyntaxAnalysis.h"
+#include "IR.h"
+#include "InstructionSelection.h"
+#include "LivenessAnalysis.h"
 
 using namespace std;
 
@@ -44,6 +47,14 @@ int main()
 		{
 			cout << "Syntax analysis failed!" << endl;
 		}
+
+		Instructions instructions;
+
+		Variables variables;
+
+		fill_instruction_list(instructions, variables, lex.getTokenList());
+
+		livenessAnalysis(instructions);
 	}
 	catch (runtime_error e)
 	{

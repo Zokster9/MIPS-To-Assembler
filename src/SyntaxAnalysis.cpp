@@ -1,4 +1,5 @@
 #include "SyntaxAnalysis.h"
+#include "Constants.h"
 #include <iostream>
 #include <iomanip>
 
@@ -31,8 +32,8 @@ void SyntaxAnalysis::printSyntaxError(Token token)
 
 void SyntaxAnalysis::printTokenInfo(Token token)
 {
-	std::cout << setw(20) << left << token.tokenTypeToString(token.getType());
-	cout << setw(25) << right << token.getValue() << endl;
+	std::cout << setw(LEFT_ALIGN) << left << token.tokenTypeToString(token.getType());
+	cout << setw(RIGHT_ALIGN) << right << token.getValue() << endl;
 }
 
 void SyntaxAnalysis::eat(TokenType t)
@@ -43,7 +44,9 @@ void SyntaxAnalysis::eat(TokenType t)
 		{
 			cout << currentToken.getValue() << endl;
 			if (t != T_END_OF_FILE)
+			{
 				currentToken = getNextToken();
+			}
 		}
 		else
 		{
@@ -60,10 +63,6 @@ void SyntaxAnalysis::Q()
 		S();
 		eat(T_SEMI_COL);
 		L();
-	}
-	else
-	{
-		printSyntaxError(currentToken);
 	}
 }
 
@@ -96,10 +95,6 @@ void SyntaxAnalysis::S()
 			break;
 		}
 	}
-	else
-	{
-		printSyntaxError(currentToken);
-	}
 }
 
 void SyntaxAnalysis::L()
@@ -110,10 +105,6 @@ void SyntaxAnalysis::L()
 			eat(T_END_OF_FILE);
 		else
 			Q();
-	}
-	else
-	{
-		printSyntaxError(currentToken);
 	}
 }
 
@@ -191,9 +182,5 @@ void SyntaxAnalysis::E()
 			eat(T_NOP);
 			break;
 		}
-	}
-	else
-	{
-		printSyntaxError(currentToken);
 	}
 }
