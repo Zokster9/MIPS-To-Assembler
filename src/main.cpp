@@ -2,6 +2,7 @@
 #include <exception>
 
 #include "LexicalAnalysis.h"
+#include "Function.h"
 #include "SyntaxAnalysis.h"
 #include "IR.h"
 #include "InstructionSelection.h"
@@ -9,6 +10,7 @@
 #include "InterferenceGraph.h"
 #include "Simplification.h"
 #include "ResourceAllocation.h"
+#include "Output.h"
 
 using namespace std;
 
@@ -17,7 +19,7 @@ int main()
 {
 	try
 	{
-		std::string fileName = ".\\..\\examples\\simple.mavn";
+		std::string fileName = ".\\..\\examples\\multiply.mavn";
 		bool retVal = false;
 
 		LexicalAnalysis lex;
@@ -40,7 +42,9 @@ int main()
 			throw runtime_error("\nException! Lexical analysis failed!\n");
 		}
 
-		SyntaxAnalysis syntax(lex);
+		Function f;
+
+		SyntaxAnalysis syntax(lex, f);
 
 		if (syntax.Do())
 		{
@@ -74,6 +78,8 @@ int main()
 		regs = get_regs();
 
 		do_resource_allocation(&interference_graph, &stack, regs);
+
+		write(instructions, variables, f);
 	}
 	catch (runtime_error e)
 	{

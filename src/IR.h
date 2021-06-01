@@ -2,7 +2,9 @@
 #define __IR__
 
 #include "Types.h"
+#include <ostream>
 
+using namespace std;
 
 /**
  * This class represents one variable from program code.
@@ -21,13 +23,17 @@ public:
 	Variable(std::string name, int pos) : m_type(NO_TYPE), m_name(name), m_position(pos), m_assignment(no_assign), m_value(-1) {}
 	Variable(std::string name, int val, VariableType type) : m_type(type), m_name(name), m_position(-1), m_assignment(no_assign), m_value(val) {}
 	Variable(std::string name, VariableType type) : m_type(type), m_name(name), m_position(-1), m_assignment(no_assign), m_value(-1) {}
+
 	bool operator==(const Variable* var);
+
 	void set_position(int position);
 	void set_assignment(Regs reg);
 	std::string get_name() const;
 	VariableType get_type();
 	int get_position() const;
 	Regs get_assignment();
+
+	friend ostream& operator<<(ostream& out, Variable* var);
 
 private:
 	VariableType m_type;
@@ -51,6 +57,8 @@ void push_back_var(Variables& vars, Variable* var);
 
 int get_num_reg_vars(Variables& vars);
 
+int get_num_mem_vars(Variables& vars);
+
 Variable* get_variable(int position, Variables* vars);
 
 Variable* get_variable(std::string name, Variables& vars);
@@ -63,10 +71,13 @@ class Instruction
 {
 public:
 	Instruction () : m_position(0), m_type(I_NO_TYPE) {}
+	Instruction(int pos, InstructionType type) : m_position(pos), m_type(type) {}
 	Instruction (int pos, InstructionType type, Variables& dst, Variables& src) :
 		m_position(pos), m_type(type), m_dst(dst), m_src(src) {}
 	Instruction(int pos, InstructionType type, Variables& dst, Variables& src, Variables& use, Variables& def) :
 		m_position(pos), m_type(type), m_dst(dst), m_src(src), m_use(use), m_def(def) {}
+	Instruction(int pos, InstructionType type, Variables& dst, Variables& src, std::string const_, Variables& use, Variables& def) :
+		m_position(pos), m_type(type), m_dst(dst), m_src(src), m_const(const_), m_use(use), m_def(def) {}
 
 	InstructionType get_instruction_type();
 	Variables get_use();
@@ -81,9 +92,12 @@ public:
 	void add_pred(Instruction* instruction);
 	void add_succ(Instruction* instruction);
 
+	friend ostream& operator<<(ostream& out, Instruction* instruction);
+
 private:
 	int m_position;
 	InstructionType m_type;
+	std::string m_const;
 	
 	Variables m_dst;
 	Variables m_src;

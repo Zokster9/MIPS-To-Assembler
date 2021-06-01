@@ -1,6 +1,7 @@
 #pragma once
 #include "LexicalAnalysis.h"
 #include "Token.h"
+#include "Function.h"
 
 class SyntaxAnalysis
 {
@@ -9,7 +10,7 @@ public:
 	/**
 	* Constructor
 	*/
-	SyntaxAnalysis(LexicalAnalysis& lex);
+	SyntaxAnalysis(LexicalAnalysis& lex, Function& function);
 
 	/**
 	* Method which performs lexical analysis
@@ -64,6 +65,11 @@ private:
 	* Reference to lexical analysis module
 	*/
 	LexicalAnalysis& lexicalAnalysis;
+
+	/**
+	* Reference to Function object
+	*/
+	Function& f;
 
 	/**
 	* Syntax error indicator

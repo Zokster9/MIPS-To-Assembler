@@ -35,6 +35,12 @@ Regs Variable::get_assignment()
 	return m_assignment;
 }
 
+ostream& operator<<(ostream& out, Variable* var)
+{
+	out << var->m_name << ":\t.word " << var->m_value << endl;
+	return out;
+}
+
 bool variable_exists(Variable* var, Variables& vars)
 {
 	Variables::const_iterator it;
@@ -75,6 +81,18 @@ int get_num_reg_vars(Variables& vars)
 	return counter;
 }
 
+int get_num_mem_vars(Variables& vars)
+{
+	Variables::const_iterator it;
+	int counter = 0;
+	for (it = vars.begin(); it != vars.end(); it++)
+	{
+		if ((*it)->get_type() == Variable::MEM_VAR)
+			counter++;
+	}
+	return counter;
+}
+
 Variable* get_variable(int position, Variables* vars)
 {
 	Variables::const_iterator it;
@@ -93,6 +111,36 @@ Variable* get_variable(std::string name, Variables& vars)
 		if ((*it)->get_name() == name)
 			return (*it);
 	}
+}
+
+ostream& operator<<(ostream& out, Instruction* instruction)
+{
+	if (instruction->m_type == I_ADD)
+	{
+		Variable* dst_var = *instruction->m_dst.begin();
+
+		Variables::const_iterator src_it = instruction->m_src.begin();
+		Variable* src1_var = *(src_it++);
+		Variable* src2_var = *src_it;
+
+		out << "\tadd\t$t" << dst_var->get_assignment() - 1 << ", $t" << src1_var->get_assignment() - 1 << ", $t" << src2_var->get_assignment() - 1 << endl;
+	}
+	else if (instruction->m_type == I_LW)
+	{
+		Variable* dst_var = *instruction->m_dst.begin();
+		Variable* src_var = *instruction->m_src.begin();
+
+		out << "\tla\t$t" << dst_var->get_assignment() - 1 << ", " << instruction->m_const << "($t" << src_var->get_assignment() - 1 << ")" << endl;
+	}
+	else if (instruction->m_type == I_LA)
+	{
+		Variable* dst_var = *instruction->m_dst.begin();
+		Variable* src_var = *instruction->m_src.begin();
+
+		out << "\tlw\t$t" << dst_var->get_assignment() - 1 << ", " << src_var->get_name() << endl;
+	}
+
+	return out;
 }
 
 InstructionType Instruction::get_instruction_type()

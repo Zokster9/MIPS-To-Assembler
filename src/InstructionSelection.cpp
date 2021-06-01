@@ -184,6 +184,7 @@ void add_LW_instruction(Instructions& instructions, Variables& variables, TokenL
 	Variables vars_src;
 	Variables use;
 	Variables def;
+	string const_;
 	Instruction* pred_instr = new Instruction();
 
 	it++;
@@ -192,6 +193,7 @@ void add_LW_instruction(Instructions& instructions, Variables& variables, TokenL
 
 	it++;
 	it++;
+	const_ = (*it).getValue();
 	it++;
 	it++;
 
@@ -200,7 +202,7 @@ void add_LW_instruction(Instructions& instructions, Variables& variables, TokenL
 	fill_def(def, vars_dst);
 	fill_use(use, vars_src);
 
-	Instruction* instr = new Instruction(instructions.size(), I_LW, vars_dst, vars_src, use, def);
+	Instruction* instr = new Instruction(instructions.size(), I_LW, vars_dst, vars_src, const_, use, def);
 
 	if (instructions.size() != 0)
 	{
@@ -300,12 +302,7 @@ void add_BLTZ_instruction(Instructions& instructions, Variables& variables, Toke
 
 void add_NOP_instruction(Instructions& instructions)
 {
-	Variables vars_dst;
-	Variables vars_src;
-	Variables use;
-	Variables def;
-
-	Instruction* instr = new Instruction(instructions.size(), I_NOP, vars_dst, vars_src);
+	Instruction* instr = new Instruction(instructions.size(), I_NOP);
 	instructions.push_back(instr);
 }
 
@@ -363,7 +360,7 @@ void add_SW_instruction(Instructions& instructions, Variables& variables, TokenL
 	it++;
 	it++;
 
-	add_variable_to_instruction((*it).getValue(), variables, vars_src, position);
+	add_variable_to_instruction((*it).getValue(), variables, vars_dst, position);
 
 	fill_def(def, vars_dst);
 	fill_use(use, vars_src);
