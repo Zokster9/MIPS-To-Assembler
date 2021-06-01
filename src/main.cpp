@@ -8,6 +8,7 @@
 #include "LivenessAnalysis.h"
 #include "InterferenceGraph.h"
 #include "Simplification.h"
+#include "ResourceAllocation.h"
 
 using namespace std;
 
@@ -67,6 +68,12 @@ int main()
 		stack<Variable*> stack;
 
 		do_simplification(&interference_graph, &stack, __REG_NUMBER__);
+
+		vector<Regs> regs;
+
+		regs = get_regs();
+
+		do_resource_allocation(&interference_graph, &stack, regs);
 	}
 	catch (runtime_error e)
 	{

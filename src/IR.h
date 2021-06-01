@@ -23,10 +23,11 @@ public:
 	Variable(std::string name, VariableType type) : m_type(type), m_name(name), m_position(-1), m_assignment(no_assign), m_value(-1) {}
 	bool operator==(const Variable* var);
 	void set_position(int position);
-	void set_assignment(Regs& reg);
+	void set_assignment(Regs reg);
 	std::string get_name() const;
 	VariableType get_type();
 	int get_position() const;
+	Regs get_assignment();
 
 private:
 	VariableType m_type;

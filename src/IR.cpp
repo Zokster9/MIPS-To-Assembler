@@ -10,7 +10,7 @@ void Variable::set_position(int position)
 	m_position = position;
 }
 
-void Variable::set_assignment(Regs& reg)
+void Variable::set_assignment(Regs reg)
 {
 	m_assignment = reg;
 }
@@ -28,6 +28,11 @@ Variable::VariableType Variable::get_type()
 int Variable::get_position() const
 {
 	return m_position;
+}
+
+Regs Variable::get_assignment()
+{
+	return m_assignment;
 }
 
 bool variable_exists(Variable* var, Variables& vars)

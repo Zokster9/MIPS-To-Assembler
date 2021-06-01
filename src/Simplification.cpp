@@ -33,7 +33,7 @@ void do_simplification(InterferenceGraph* interference_graph, stack<Variable*>* 
 		
 		if (max_rang == -1)
 		{
-			// TODO: Exception
+			throw std::runtime_error("Spilling occurred");
 		}
 
 		max_rang = -1;
