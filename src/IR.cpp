@@ -168,9 +168,24 @@ Variables Instruction::get_out()
 	return m_out;
 }
 
+std::string Instruction::get_label_name()
+{
+	return m_label_name;
+}
+
 std::list<Instruction*> Instruction::get_succ()
 {
 	return m_succ;
+}
+
+std::list<Instruction*> Instruction::get_pred()
+{
+	return m_pred;
+}
+
+int Instruction::get_position()
+{
+	return m_position;
 }
 
 void Instruction::set_in(Variables& in)

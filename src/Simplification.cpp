@@ -18,7 +18,12 @@ void do_simplification(InterferenceGraph* interference_graph, stack<Variable*>* 
 			for (int k = 0; k < matrix[j].size(); k++)
 			{
 				if (matrix[j][k] == __INTERFERENCE__)
-					current_rang++;
+				{
+					if (std::find(already_on_stack.begin(), already_on_stack.end(), k) == already_on_stack.end())
+					{
+						current_rang++;
+					}
+				}
 			}
 
 			if (current_rang > max_rang && current_rang < degree)

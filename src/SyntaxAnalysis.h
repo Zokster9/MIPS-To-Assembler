@@ -2,6 +2,7 @@
 #include "LexicalAnalysis.h"
 #include "Token.h"
 #include "Function.h"
+#include "Label.h"
 
 class SyntaxAnalysis
 {
@@ -10,7 +11,7 @@ public:
 	/**
 	* Constructor
 	*/
-	SyntaxAnalysis(LexicalAnalysis& lex, Function& function);
+	SyntaxAnalysis(LexicalAnalysis& lex, Function& function, Labels& labels);
 
 	/**
 	* Method which performs lexical analysis
@@ -72,6 +73,11 @@ private:
 	Function& f;
 
 	/**
+	* Reference to list of labels
+	*/
+	Labels& labels;
+
+	/**
 	* Syntax error indicator
 	*/
 	bool errorFound;
@@ -85,4 +91,6 @@ private:
 	* Current token that is being analyzed
 	*/
 	Token currentToken;
+
+	Token previousToken;
 };

@@ -5,7 +5,7 @@
 
 using namespace std;
 
-SyntaxAnalysis::SyntaxAnalysis(LexicalAnalysis& lex, Function& function) : lexicalAnalysis(lex), f(function), 
+SyntaxAnalysis::SyntaxAnalysis(LexicalAnalysis& lex, Function& function, Labels& labels) : lexicalAnalysis(lex), f(function), labels(labels),
 errorFound(false), tokenIterator(lexicalAnalysis.getTokenList().begin()) 
 {
 }
@@ -44,6 +44,8 @@ void SyntaxAnalysis::eat(TokenType t)
 		if (currentToken.getType() == t)
 		{
 			cout << currentToken.getValue() << endl;
+			previousToken = currentToken;
+
 			if (t == T_FUNC)
 			{
 				currentToken = getNextToken();
@@ -52,6 +54,12 @@ void SyntaxAnalysis::eat(TokenType t)
 			else if (t != T_END_OF_FILE)
 			{
 				currentToken = getNextToken();
+
+				if (currentToken.getType() == T_COL)
+				{
+					Label* label = new Label(previousToken.getValue());
+					labels.push_back(label);
+				}
 			}
 
 		}

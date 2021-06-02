@@ -72,19 +72,25 @@ class Instruction
 public:
 	Instruction () : m_position(0), m_type(I_NO_TYPE) {}
 	Instruction(int pos, InstructionType type) : m_position(pos), m_type(type) {}
+	Instruction(int pos, InstructionType type, std::string label_name) : m_position(pos), m_type(type), m_label_name(label_name) {}
 	Instruction (int pos, InstructionType type, Variables& dst, Variables& src) :
 		m_position(pos), m_type(type), m_dst(dst), m_src(src) {}
 	Instruction(int pos, InstructionType type, Variables& dst, Variables& src, Variables& use, Variables& def) :
 		m_position(pos), m_type(type), m_dst(dst), m_src(src), m_use(use), m_def(def) {}
 	Instruction(int pos, InstructionType type, Variables& dst, Variables& src, std::string const_, Variables& use, Variables& def) :
 		m_position(pos), m_type(type), m_dst(dst), m_src(src), m_const(const_), m_use(use), m_def(def) {}
+	Instruction(int pos, InstructionType type, Variables& dst, Variables& src, Variables& use, Variables& def, std::string label_name) :
+		m_position(pos), m_type(type), m_dst(dst), m_src(src), m_use(use), m_def(def), m_label_name(label_name) {}
 
 	InstructionType get_instruction_type();
 	Variables get_use();
 	Variables get_def();
 	Variables get_in();
 	Variables get_out();
+	std::string get_label_name();
 	std::list<Instruction*> get_succ();
+	std::list<Instruction*> get_pred();
+	int get_position();
 
 	void set_in(Variables& in);
 	void set_out(Variables& out);
@@ -98,6 +104,7 @@ private:
 	int m_position;
 	InstructionType m_type;
 	std::string m_const;
+	std::string m_label_name;
 	
 	Variables m_dst;
 	Variables m_src;

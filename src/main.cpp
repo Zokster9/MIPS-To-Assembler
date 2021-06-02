@@ -11,6 +11,7 @@
 #include "Simplification.h"
 #include "ResourceAllocation.h"
 #include "Output.h"
+#include "Label.h"
 
 using namespace std;
 
@@ -42,9 +43,11 @@ int main()
 			throw runtime_error("\nException! Lexical analysis failed!\n");
 		}
 
+		Labels labels;
+
 		Function f;
 
-		SyntaxAnalysis syntax(lex, f);
+		SyntaxAnalysis syntax(lex, f, labels);
 
 		if (syntax.Do())
 		{
@@ -59,7 +62,9 @@ int main()
 
 		Variables variables;
 
-		fill_instruction_list(instructions, variables, lex.getTokenList());
+		fill_instruction_list(instructions, variables, lex.getTokenList(), labels);
+
+		set_jump_relations(instructions, labels);
 
 		livenessAnalysis(instructions);
 
