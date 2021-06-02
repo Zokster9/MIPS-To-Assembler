@@ -13,3 +13,6 @@ _func main;
 	la		r5, m2;
 	lw		r2, 0(r5);
 	add		r3, r1, r2;
+	div		r4, r1;
+	not		r3, r2;
+	seq		r1, r5, r3;

@@ -193,8 +193,28 @@ void SyntaxAnalysis::E()
 			eat(T_COMMA);
 			eat(T_ID);
 			break;
-		default:
+		case T_NOP:
 			eat(T_NOP);
+			break;
+		case T_DIV:
+			eat(T_DIV);
+			eat(T_R_ID);
+			eat(T_COMMA);
+			eat(T_R_ID);
+			break;
+		case T_NOT:
+			eat(T_NOT);
+			eat(T_R_ID);
+			eat(T_COMMA);
+			eat(T_R_ID);
+			break;
+		case T_SEQ:
+			eat(T_SEQ);
+			eat(T_R_ID);
+			eat(T_COMMA);
+			eat(T_R_ID);
+			eat(T_COMMA);
+			eat(T_R_ID);
 			break;
 		}
 	}
