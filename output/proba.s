@@ -20,7 +20,7 @@ lab:
 	sub	$t0, $t0, $t2
 nzm:
 	sw	$t1, 0($t0)
-	b	$tlab
+	b	lab
 probica:
 	li	$t0, 9
 	nop

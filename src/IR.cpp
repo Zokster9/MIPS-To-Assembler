@@ -183,7 +183,31 @@ ostream& operator<<(ostream& out, Instruction* instruction)
 	{
 		std::string label_name = instruction->m_label_name;
 
-		out << "\tb\t$t" << label_name << endl;
+		out << "\tb\t" << label_name << endl;
+	}
+	else if (instruction->m_type == I_DIV)
+	{
+		Variable* dst_var = *instruction->m_dst.begin();
+		Variable* src_var = *instruction->m_src.begin();
+
+		out << "\tdiv\t$t" << dst_var->get_assignment() - 1 << ", $t" << src_var->get_assignment() - 1 << endl;
+	}
+	else if (instruction->m_type == I_NOT)
+	{
+		Variable* dst_var = *instruction->m_dst.begin();
+		Variable* src_var = *instruction->m_src.begin();
+
+		out << "\tnot\t$t" << dst_var->get_assignment() - 1 << ", $t" << src_var->get_assignment() - 1 << endl;
+	}
+	if (instruction->m_type == I_SEQ)
+	{
+		Variable* dst_var = *instruction->m_dst.begin();
+
+		Variables::const_iterator src_it = instruction->m_src.begin();
+		Variable* src1_var = *(src_it++);
+		Variable* src2_var = *src_it;
+
+		out << "\tseq\t$t" << dst_var->get_assignment() - 1 << ", $t" << src1_var->get_assignment() - 1 << ", $t" << src2_var->get_assignment() - 1 << endl;
 	}
 	else if (instruction->m_type == I_NOP)
 	{

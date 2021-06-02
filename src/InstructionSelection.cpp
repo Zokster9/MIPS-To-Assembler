@@ -64,6 +64,18 @@ void fill_instruction_list(Instructions& instructions, Variables& variables, Tok
 		{
 			add_SW_instruction(instructions, variables, it, position, labels, has_neighbour_label, lab_name);
 		}
+		else if (token_type == T_DIV)
+		{
+			add_DIV_instruction(instructions, variables, it, position, labels, has_neighbour_label, lab_name);
+		}
+		else if (token_type == T_NOT)
+		{
+			add_NOT_instruction(instructions, variables, it, position, labels, has_neighbour_label, lab_name);
+		}
+		else if (token_type == T_SEQ)
+		{
+			add_SEQ_instruction(instructions, variables, it, position, labels, has_neighbour_label, lab_name);
+		}
 
 		if (previousToken.getType() == T_COL)
 		{
@@ -478,6 +490,134 @@ void add_SW_instruction(Instructions& instructions, Variables& variables, TokenL
 	fill_use(use, vars_src);
 
 	Instruction* instr = new Instruction(instructions.size(), I_SW, vars_dst, vars_src, const_, use, def);
+
+	if (instructions.size() != 0)
+	{
+		pred_instr = get_pred_instr(instructions);
+
+		if (pred_instr->get_instruction_type() != I_B)
+		{
+			instr->add_pred(pred_instr);
+			pred_instr->add_succ(instr);
+		}
+	}
+
+	if (has_neighbour_label)
+	{
+		add_instruction_to_label(instr, pred_instr, lab_name, labels);
+	}
+
+	instructions.push_back(instr);
+}
+
+void add_DIV_instruction(Instructions& instructions, Variables& variables, TokenList::iterator it, int& position, Labels& labels, bool has_neighbour_label, string lab_name)
+{
+	Variables vars_dst;
+	Variables vars_src;
+	Variables use;
+	Variables def;
+	Instruction* pred_instr = new Instruction();
+
+	it++;
+
+	add_variable_to_instruction((*it).getValue(), variables, vars_dst, position);
+
+	it++;
+	it++;
+
+	add_variable_to_instruction((*it).getValue(), variables, vars_src, position);
+
+	fill_def(def, vars_dst);
+	fill_use(use, vars_src);
+
+	Instruction* instr = new Instruction(instructions.size(), I_DIV, vars_dst, vars_src, use, def);
+
+	if (instructions.size() != 0)
+	{
+		pred_instr = get_pred_instr(instructions);
+
+		if (pred_instr->get_instruction_type() != I_B)
+		{
+			instr->add_pred(pred_instr);
+			pred_instr->add_succ(instr);
+		}
+	}
+
+	if (has_neighbour_label)
+	{
+		add_instruction_to_label(instr, pred_instr, lab_name, labels);
+	}
+
+	instructions.push_back(instr);
+}
+
+void add_NOT_instruction(Instructions& instructions, Variables& variables, TokenList::iterator it, int& position, Labels& labels, bool has_neighbour_label, string lab_name)
+{
+	Variables vars_dst;
+	Variables vars_src;
+	Variables use;
+	Variables def;
+	Instruction* pred_instr = new Instruction();
+
+	it++;
+
+	add_variable_to_instruction((*it).getValue(), variables, vars_dst, position);
+
+	it++;
+	it++;
+
+	add_variable_to_instruction((*it).getValue(), variables, vars_src, position);
+
+	fill_def(def, vars_dst);
+	fill_use(use, vars_src);
+
+	Instruction* instr = new Instruction(instructions.size(), I_NOT, vars_dst, vars_src, use, def);
+
+	if (instructions.size() != 0)
+	{
+		pred_instr = get_pred_instr(instructions);
+
+		if (pred_instr->get_instruction_type() != I_B)
+		{
+			instr->add_pred(pred_instr);
+			pred_instr->add_succ(instr);
+		}
+	}
+
+	if (has_neighbour_label)
+	{
+		add_instruction_to_label(instr, pred_instr, lab_name, labels);
+	}
+
+	instructions.push_back(instr);
+}
+
+void add_SEQ_instruction(Instructions& instructions, Variables& variables, TokenList::iterator it, int& position, Labels& labels, bool has_neighbour_label, string lab_name)
+{
+	Variables vars_dst;
+	Variables vars_src;
+	Variables use;
+	Variables def;
+	Instruction* pred_instr = new Instruction();
+
+	it++;
+
+	add_variable_to_instruction((*it).getValue(), variables, vars_dst, position);
+
+	it++;
+	it++;
+
+	add_variable_to_instruction((*it).getValue(), variables, vars_src, position);
+
+	it++;
+	it++;
+
+	add_variable_to_instruction((*it).getValue(), variables, vars_src, position);
+
+	fill_def(def, vars_dst);
+	fill_use(use, vars_src);
+
+	Instruction* instr = new Instruction(instructions.size(), I_SEQ, vars_dst, vars_src, use, def);
 
 	if (instructions.size() != 0)
 	{

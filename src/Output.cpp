@@ -6,7 +6,7 @@ using namespace std;
 
 void write(Instructions& instructions, Variables& variables, Function& f, Labels& labels)
 {
-	std::string fileName = ".\\..\\output\\simple1.s";
+	std::string fileName = ".\\..\\output\\proba.s";
 	std::ofstream out(fileName);
 
 	out << ".globl " << f.get_name() << endl << endl;

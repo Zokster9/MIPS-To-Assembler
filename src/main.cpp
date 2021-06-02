@@ -20,7 +20,7 @@ int main()
 {
 	try
 	{
-		std::string fileName = ".\\..\\examples\\simple.mavn";
+		std::string fileName = ".\\..\\examples\\proba.mavn";
 		bool retVal = false;
 
 		LexicalAnalysis lex;

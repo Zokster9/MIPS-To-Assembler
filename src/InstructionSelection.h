@@ -28,6 +28,12 @@ void add_SUB_instruction(Instructions& instructions, Variables& variables, Token
 
 void add_SW_instruction(Instructions& instructions, Variables& variables, TokenList::iterator it, int& position, Labels& labels, bool has_neighbour_label, string lab_name);
 
+void add_DIV_instruction(Instructions& instructions, Variables& variables, TokenList::iterator it, int& position, Labels& labels, bool has_neighbour_label, string lab_name);
+
+void add_NOT_instruction(Instructions& instructions, Variables& variables, TokenList::iterator it, int& position, Labels& labels, bool has_neighbour_label, string lab_name);
+
+void add_SEQ_instruction(Instructions& instructions, Variables& variables, TokenList::iterator it, int& position, Labels& labels, bool has_neighbour_label, string lab_name);
+
 void add_variable_to_instruction(std::string name, Variables& vars, Variables& instr_vars, int& position);
 
 void add_instruction_to_label(Instruction* instr, Instruction* pred_instr, string lab_name, Labels& labels);
