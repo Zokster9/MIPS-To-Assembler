@@ -84,7 +84,7 @@ int main()
 
 		do_resource_allocation(&interference_graph, &stack, regs);
 
-		write(instructions, variables, f);
+		write(instructions, variables, f, labels);
 	}
 	catch (runtime_error e)
 	{

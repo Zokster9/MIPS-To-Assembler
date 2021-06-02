@@ -159,10 +159,12 @@ void add_ADDI_instruction(Instructions& instructions, Variables& variables, Toke
 	it++;
 	it++;
 
+	string const_ = (*it).getValue();
+
 	fill_def(def, vars_dst);
 	fill_use(use, vars_src);
 
-	Instruction* instr = new Instruction(instructions.size(), I_ADDI, vars_dst, vars_src, use, def);
+	Instruction* instr = new Instruction(instructions.size(), I_ADDI, vars_dst, vars_src, const_, use, def);
 
 	if (instructions.size() != 0)
 	{
@@ -281,10 +283,15 @@ void add_LI_instruction(Instructions& instructions, Variables& variables, TokenL
 
 	add_variable_to_instruction((*it).getValue(), variables, vars_dst, position);
 
+	it++;
+	it++;
+
+	string const_ = (*it).getValue();
+
 	fill_def(def, vars_dst);
 	fill_use(use, vars_src);
 
-	Instruction* instr = new Instruction(instructions.size(), I_LI, vars_dst, vars_src, use, def);
+	Instruction* instr = new Instruction(instructions.size(), I_LI, vars_dst, vars_src, const_, use, def);
 
 	if (instructions.size() != 0)
 	{
@@ -459,6 +466,9 @@ void add_SW_instruction(Instructions& instructions, Variables& variables, TokenL
 
 	it++;
 	it++;
+
+	string const_ = (*it).getValue();
+
 	it++;
 	it++;
 
@@ -467,7 +477,7 @@ void add_SW_instruction(Instructions& instructions, Variables& variables, TokenL
 	fill_def(def, vars_dst);
 	fill_use(use, vars_src);
 
-	Instruction* instr = new Instruction(instructions.size(), I_SW, vars_dst, vars_src, use, def);
+	Instruction* instr = new Instruction(instructions.size(), I_SW, vars_dst, vars_src, const_, use, def);
 
 	if (instructions.size() != 0)
 	{

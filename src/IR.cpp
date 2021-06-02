@@ -130,14 +130,64 @@ ostream& operator<<(ostream& out, Instruction* instruction)
 		Variable* dst_var = *instruction->m_dst.begin();
 		Variable* src_var = *instruction->m_src.begin();
 
-		out << "\tla\t$t" << dst_var->get_assignment() - 1 << ", " << instruction->m_const << "($t" << src_var->get_assignment() - 1 << ")" << endl;
+		out << "\tlw\t$t" << dst_var->get_assignment() - 1 << ", " << instruction->m_const << "($t" << src_var->get_assignment() - 1 << ")" << endl;
 	}
 	else if (instruction->m_type == I_LA)
 	{
 		Variable* dst_var = *instruction->m_dst.begin();
 		Variable* src_var = *instruction->m_src.begin();
 
-		out << "\tlw\t$t" << dst_var->get_assignment() - 1 << ", " << src_var->get_name() << endl;
+		out << "\tla\t$t" << dst_var->get_assignment() - 1 << ", " << src_var->get_name() << endl;
+	}
+	else if (instruction->m_type == I_LI)
+	{
+		Variable* dst_var = *instruction->m_dst.begin();
+		std::string const_ = instruction->m_const;
+
+		out << "\tli\t$t" << dst_var->get_assignment() - 1 << ", " << const_ << endl;
+	}
+	else if (instruction->m_type == I_SUB)
+	{
+		Variable* dst_var = *instruction->m_dst.begin();
+
+		Variables::const_iterator src_it = instruction->m_src.begin();
+		Variable* src1_var = *(src_it++);
+		Variable* src2_var = *src_it;
+
+		out << "\tsub\t$t" << dst_var->get_assignment() - 1 << ", $t" << src1_var->get_assignment() - 1 << ", $t" << src2_var->get_assignment() - 1 << endl;
+	}
+	else if (instruction->m_type == I_ADDI)
+	{
+		Variable* dst_var = *instruction->m_dst.begin();
+
+		Variable* src_var = *instruction->m_src.begin();
+		std::string const_ = instruction->m_const;
+
+		out << "\taddi\t$t" << dst_var->get_assignment() - 1 << ", $t" << src_var->get_assignment() - 1 << ", " << const_ << endl;
+	}
+	else if (instruction->m_type == I_BLTZ)
+	{
+		Variable* src_var = *instruction->m_src.begin();
+		std::string label_name = instruction->m_label_name;
+
+		out << "\tbltz\t$t" << src_var->get_assignment() - 1 << ", " << label_name << endl;
+	}
+	else if (instruction->m_type == I_SW)
+	{
+		Variable* dst_var = *instruction->m_dst.begin();
+		Variable* src_var = *instruction->m_src.begin();
+
+		out << "\tsw\t$t" << src_var->get_assignment() - 1 << ", " << instruction->m_const << "($t" << dst_var->get_assignment() - 1 << ")" << endl;
+	}
+	else if (instruction->m_type == I_B)
+	{
+		std::string label_name = instruction->m_label_name;
+
+		out << "\tb\t$t" << label_name << endl;
+	}
+	else if (instruction->m_type == I_NOP)
+	{
+		out << "\tnop" << endl;
 	}
 
 	return out;

@@ -19,3 +19,9 @@ Instruction* Label::get_succ_instruction()
 {
 	return (*succ.begin());
 }
+
+ostream& operator<<(ostream& out, Label* label)
+{
+	out << label->m_name << ":" << endl;
+	return out;
+}

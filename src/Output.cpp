@@ -4,7 +4,7 @@
 
 using namespace std;
 
-void write(Instructions& instructions, Variables& variables, Function& f)
+void write(Instructions& instructions, Variables& variables, Function& f, Labels& labels)
 {
 	std::string fileName = ".\\..\\output\\multiply.s";
 	std::ofstream out(fileName);
@@ -30,8 +30,48 @@ void write(Instructions& instructions, Variables& variables, Function& f)
 
 	for (instr_it = instructions.begin(); instr_it != instructions.end(); instr_it++)
 	{
+		if (is_instruction_after_label(*instr_it, labels))
+		{
+			Label* label = new Label();
+			label = get_label(*instr_it, labels);
+
+			out << label;
+		}
+
 		out << *instr_it;
 	}
 
 	out.close();
+}
+
+bool is_instruction_after_label(Instruction* instruction, Labels& labels)
+{
+	Labels::iterator lab_it;
+
+	for (lab_it = labels.begin(); lab_it != labels.end(); lab_it++)
+	{
+		Instruction* succ = (*lab_it)->get_succ_instruction();
+		
+		if (succ->get_position() == instruction->get_position())
+		{
+			return true;
+		}
+	}
+	
+	return false;
+}
+
+Label* get_label(Instruction* instruction, Labels& labels)
+{
+	Labels::iterator lab_it;
+
+	for (lab_it = labels.begin(); lab_it != labels.end(); lab_it++)
+	{
+		Instruction* succ = (*lab_it)->get_succ_instruction();
+
+		if (succ->get_position() == instruction->get_position())
+		{
+			return *lab_it;
+		}
+	}
 }

@@ -15,6 +15,8 @@ public:
 
 	Instruction* get_succ_instruction();
 
+	friend ostream& operator<<(ostream& out, Label* label);
+
 private:
 	string m_name;
 	Instructions pred;
