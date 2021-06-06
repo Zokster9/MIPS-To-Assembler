@@ -199,7 +199,7 @@ ostream& operator<<(ostream& out, Instruction* instruction)
 
 		out << "\tnot\t$t" << dst_var->get_assignment() - 1 << ", $t" << src_var->get_assignment() - 1 << endl;
 	}
-	if (instruction->m_type == I_SEQ)
+	else if (instruction->m_type == I_SEQ)
 	{
 		Variable* dst_var = *instruction->m_dst.begin();
 

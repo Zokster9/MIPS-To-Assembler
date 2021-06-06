@@ -29,3 +29,5 @@ private:
  */
 typedef list<Label*> Labels;
 
+bool label_exists(Labels labels, string lab_name);
+

@@ -5,7 +5,7 @@
 #include "Function.h"
 #include "Label.h"
 
-void write(Instructions& instructions, Variables& variables, Function& f, Labels& labels);
+void write(Instructions& instructions, Variables& variables, Function& f, Labels& labels, string& fileName);
 
 bool is_instruction_after_label(Instruction* instruction, Labels& labels);
 

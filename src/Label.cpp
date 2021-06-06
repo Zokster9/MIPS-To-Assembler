@@ -25,3 +25,16 @@ ostream& operator<<(ostream& out, Label* label)
 	out << label->m_name << ":" << endl;
 	return out;
 }
+
+bool label_exists(Labels labels, string lab_name)
+{
+	Labels::const_iterator it;
+
+	for (it = labels.begin(); it != labels.end(); it++)
+	{
+		if ((*it)->get_name() == lab_name)
+			return true;
+	}
+
+	return false;
+}

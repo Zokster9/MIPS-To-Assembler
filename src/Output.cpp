@@ -4,9 +4,8 @@
 
 using namespace std;
 
-void write(Instructions& instructions, Variables& variables, Function& f, Labels& labels)
+void write(Instructions& instructions, Variables& variables, Function& f, Labels& labels, string& fileName)
 {
-	std::string fileName = ".\\..\\output\\proba.s";
 	std::ofstream out(fileName);
 
 	out << ".globl " << f.get_name() << endl << endl;
@@ -44,6 +43,7 @@ void write(Instructions& instructions, Variables& variables, Function& f, Labels
 	out.close();
 }
 
+// proverava da li se instrukcija nalazi posle labele
 bool is_instruction_after_label(Instruction* instruction, Labels& labels)
 {
 	Labels::iterator lab_it;

@@ -46,8 +46,8 @@ void fill_use(Variables& use, Variables& src);
 
 Instruction* get_pred_instr(Instructions& instructions);
 
-void set_jump_relations(Instructions& instructions, Labels& labels);
+void set_branch_relations(Instructions& instructions, Labels& labels);
 
-void add_jump_succ(Instruction* instruction, Labels& labels);
+void add_branch_succ(Instruction* instruction, Labels& labels);
 
-bool instruction_exists(Instructions& instructions, Instruction* instruction);
+bool is_instruction_pred(Instructions& instructions, Instruction* instruction);

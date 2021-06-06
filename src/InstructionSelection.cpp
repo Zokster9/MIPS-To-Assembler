@@ -1,9 +1,14 @@
 #include "InstructionSelection.h"
 
+
+// prolazi se kroz token listu i pune se liste varijabli i instrukcija
 void fill_instruction_list(Instructions& instructions, Variables& variables, TokenList& tokenList, Labels& labels)
 {
 	TokenList::iterator it;
+
+	//pozicija za registarsku varijablu
 	int position = 0;
+
 	Token previousToken;
 
 	bool has_neighbour_label = false;
@@ -14,6 +19,7 @@ void fill_instruction_list(Instructions& instructions, Variables& variables, Tok
 	{
 		TokenType token_type = (*it).getType();
 
+		// gleda se da li instrukciji prethodi labela
 		if (previousToken.getType() == T_ID && token_type == T_COL)
 		{
 			lab_name = previousToken.getValue();
@@ -132,6 +138,7 @@ void add_ADD_instruction(Instructions& instructions, Variables& variables, Token
 
 	Instruction* instr = new Instruction(instructions.size(), I_ADD, vars_dst, vars_src, use, def);
 
+	// postavljaju se naslednici i prethodnici instrukcije ako prethodna instrukcija nije bezuslovni skok
 	if (instructions.size() != 0)
 	{
 		pred_instr = get_pred_instr(instructions);
@@ -145,7 +152,11 @@ void add_ADD_instruction(Instructions& instructions, Variables& variables, Token
 
 	if (has_neighbour_label)
 	{
-		add_instruction_to_label(instr, pred_instr, lab_name, labels);
+		// ako labela postoji postavljaju se prethodnici i naslednici labele
+		if (label_exists(labels, lab_name))
+			add_instruction_to_label(instr, pred_instr, lab_name, labels);
+		else
+			throw runtime_error("Label is not defined!");
 	}
 
 	instructions.push_back(instr);
@@ -193,7 +204,10 @@ void add_ADDI_instruction(Instructions& instructions, Variables& variables, Toke
 
 	if (has_neighbour_label)
 	{
-		add_instruction_to_label(instr, pred_instr, lab_name, labels);
+		if (label_exists(labels, lab_name))
+			add_instruction_to_label(instr, pred_instr, lab_name, labels);
+		else
+			throw runtime_error("Label is not defined!");
 	}
 }
 
@@ -232,7 +246,10 @@ void add_LA_instruction(Instructions& instructions, Variables& variables, TokenL
 
 	if (has_neighbour_label)
 	{
-		add_instruction_to_label(instr, pred_instr, lab_name, labels);
+		if (label_exists(labels, lab_name))
+			add_instruction_to_label(instr, pred_instr, lab_name, labels);
+		else
+			throw runtime_error("Label is not defined!");
 	}
 
 	instructions.push_back(instr);
@@ -277,7 +294,10 @@ void add_LW_instruction(Instructions& instructions, Variables& variables, TokenL
 
 	if (has_neighbour_label)
 	{
-		add_instruction_to_label(instr, pred_instr, lab_name, labels);
+		if (label_exists(labels, lab_name))
+			add_instruction_to_label(instr, pred_instr, lab_name, labels);
+		else
+			throw runtime_error("Label is not defined!");
 	}
 
 	instructions.push_back(instr);
@@ -318,7 +338,10 @@ void add_LI_instruction(Instructions& instructions, Variables& variables, TokenL
 
 	if (has_neighbour_label)
 	{
-		add_instruction_to_label(instr, pred_instr, lab_name, labels);
+		if (label_exists(labels, lab_name))
+			add_instruction_to_label(instr, pred_instr, lab_name, labels);
+		else
+			throw runtime_error("Label is not defined!");
 	}
 
 	instructions.push_back(instr);
@@ -347,7 +370,10 @@ void add_B_instruction(Instructions& instructions, Variables& variables, TokenLi
 
 	if (has_neighbour_label)
 	{
-		add_instruction_to_label(instr, pred_instr, lab_name, labels);
+		if (label_exists(labels, lab_name))
+			add_instruction_to_label(instr, pred_instr, lab_name, labels);
+		else
+			throw runtime_error("Label is not defined!");
 	}
 
 	instructions.push_back(instr);
@@ -387,7 +413,10 @@ void add_BLTZ_instruction(Instructions& instructions, Variables& variables, Toke
 
 	if (has_neighbour_label)
 	{
-		add_instruction_to_label(instr, pred_instr, lab_name, labels);
+		if (label_exists(labels, lab_name))
+			add_instruction_to_label(instr, pred_instr, lab_name, labels);
+		else
+			throw runtime_error("Label is not defined!");
 	}
 
 	instructions.push_back(instr);
@@ -412,7 +441,10 @@ void add_NOP_instruction(Instructions& instructions, int& position, Labels& labe
 
 	if (has_neighbour_label)
 	{
-		add_instruction_to_label(instr, pred_instr, lab_name, labels);
+		if (label_exists(labels, lab_name))
+			add_instruction_to_label(instr, pred_instr, lab_name, labels);
+		else
+			throw runtime_error("Label is not defined!");
 	}
 
 	instructions.push_back(instr);
@@ -458,7 +490,10 @@ void add_SUB_instruction(Instructions& instructions, Variables& variables, Token
 
 	if (has_neighbour_label)
 	{
-		add_instruction_to_label(instr, pred_instr, lab_name, labels);
+		if (label_exists(labels, lab_name))
+			add_instruction_to_label(instr, pred_instr, lab_name, labels);
+		else
+			throw runtime_error("Label is not defined!");
 	}
 
 	instructions.push_back(instr);
@@ -504,7 +539,10 @@ void add_SW_instruction(Instructions& instructions, Variables& variables, TokenL
 
 	if (has_neighbour_label)
 	{
-		add_instruction_to_label(instr, pred_instr, lab_name, labels);
+		if (label_exists(labels, lab_name))
+			add_instruction_to_label(instr, pred_instr, lab_name, labels);
+		else
+			throw runtime_error("Label is not defined!");
 	}
 
 	instructions.push_back(instr);
@@ -545,7 +583,10 @@ void add_DIV_instruction(Instructions& instructions, Variables& variables, Token
 
 	if (has_neighbour_label)
 	{
-		add_instruction_to_label(instr, pred_instr, lab_name, labels);
+		if (label_exists(labels, lab_name))
+			add_instruction_to_label(instr, pred_instr, lab_name, labels);
+		else
+			throw runtime_error("Label is not defined!");
 	}
 
 	instructions.push_back(instr);
@@ -586,7 +627,10 @@ void add_NOT_instruction(Instructions& instructions, Variables& variables, Token
 
 	if (has_neighbour_label)
 	{
-		add_instruction_to_label(instr, pred_instr, lab_name, labels);
+		if (label_exists(labels, lab_name))
+			add_instruction_to_label(instr, pred_instr, lab_name, labels);
+		else
+			throw runtime_error("Label is not defined!");
 	}
 
 	instructions.push_back(instr);
@@ -632,7 +676,10 @@ void add_SEQ_instruction(Instructions& instructions, Variables& variables, Token
 
 	if (has_neighbour_label)
 	{
-		add_instruction_to_label(instr, pred_instr, lab_name, labels);
+		if (label_exists(labels, lab_name))
+			add_instruction_to_label(instr, pred_instr, lab_name, labels);
+		else
+			throw runtime_error("Label is not defined!");
 	}
 
 	instructions.push_back(instr);
@@ -646,6 +693,10 @@ void add_variable_to_instruction(std::string name, Variables& vars, Variables& i
 		if (dst->get_type() == Variable::REG_VAR)
 			set_variable_position(dst, position);
 		instr_vars.push_back(dst);
+	}
+	else
+	{
+		throw runtime_error("Variable does not exist!");
 	}
 }
 
@@ -697,7 +748,8 @@ Instruction* get_pred_instr(Instructions& instructions)
 	return (*rit);
 }
 
-void set_jump_relations(Instructions& instructions, Labels& labels)
+// dodaju se naslednici branch instrukcijama
+void set_branch_relations(Instructions& instructions, Labels& labels)
 {
 	Instructions::iterator instruction_it;
 
@@ -705,12 +757,12 @@ void set_jump_relations(Instructions& instructions, Labels& labels)
 	{
 		if ((*instruction_it)->get_instruction_type() == I_B || (*instruction_it)->get_instruction_type() == I_BLTZ)
 		{
-			add_jump_succ((*instruction_it), labels);
+			add_branch_succ((*instruction_it), labels);
 		}
 	}
 }
 
-void add_jump_succ(Instruction* instruction, Labels& labels)
+void add_branch_succ(Instruction* instruction, Labels& labels)
 {
 	Labels::iterator label_it;
 
@@ -720,7 +772,7 @@ void add_jump_succ(Instruction* instruction, Labels& labels)
 		{
 			Instruction* succ = new Instruction();
 			succ = (*label_it)->get_succ_instruction();
-			if (!instruction_exists(succ->get_pred(), instruction))
+			if (!is_instruction_pred(succ->get_pred(), instruction))
 			{
 				instruction->add_succ(succ);
 				succ->add_pred(instruction);
@@ -729,7 +781,8 @@ void add_jump_succ(Instruction* instruction, Labels& labels)
 	}
 }
 
-bool instruction_exists(Instructions& instructions, Instruction* instruction)
+// provera da li je instrukcija vec postavljena kao prethodnik
+bool is_instruction_pred(Instructions& instructions, Instruction* instruction)
 {
 	Instructions::iterator instruction_it;
 

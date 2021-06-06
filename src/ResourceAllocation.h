@@ -6,7 +6,7 @@
 
 void do_resource_allocation(InterferenceGraph* interference_graph, std::stack<Variable*>* stack, vector<Regs>& regs);
 
-vector<Regs> get_regs();
+vector<Regs> get_regs(int reg_num);
 
 Regs operator++(Regs& r);
 

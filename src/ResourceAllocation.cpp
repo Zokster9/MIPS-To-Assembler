@@ -34,11 +34,11 @@ void do_resource_allocation(InterferenceGraph* interference_graph, std::stack<Va
 	}
 }
 
-vector<Regs> get_regs()
+vector<Regs> get_regs(int reg_num)
 {
 	vector<Regs> regs;
 
-	for (Regs r = t0; r != __REG_NUMBER__ + 1; ++r)
+	for (Regs r = t0; r != reg_num + 1; ++r)
 	{
 		regs.push_back(r);
 	}
