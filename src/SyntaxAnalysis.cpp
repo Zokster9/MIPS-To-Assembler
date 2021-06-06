@@ -1,3 +1,6 @@
+/* Autor: Zoran Bukorac
+Datum: 06.06.2021. */
+
 #include "SyntaxAnalysis.h"
 #include "Constants.h"
 #include <iostream>

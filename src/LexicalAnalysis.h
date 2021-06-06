@@ -1,6 +1,9 @@
 #ifndef __LEXICAL_ANALYSIS__
 #define __LEXICAL_ANALYSIS__
 
+/* Autor: Zoran Bukorac
+Datum: 06.06.2021. */
+
 #include <fstream>
 #include <vector>
 #include <list>

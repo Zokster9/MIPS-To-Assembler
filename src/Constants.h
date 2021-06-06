@@ -1,6 +1,9 @@
 #ifndef __CONSTANTS__
 #define __CONSTANTS__
 
+/* Autor: Zoran Bukorac 
+Datum: 06.06.2021. */
+
 /**
  * State symbol definitions
  */

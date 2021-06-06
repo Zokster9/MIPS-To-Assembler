@@ -1,6 +1,9 @@
 #ifndef __TYPES__
 #define __TYPES__
 
+/* Autor: Zoran Bukorac
+Datum: 06.06.2021. */
+
 #include "Constants.h"
 
 #include <iostream>

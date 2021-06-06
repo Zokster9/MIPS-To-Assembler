@@ -1,6 +1,9 @@
 #ifndef __OUTPUT__
 #define __OUTPUT__
 
+/* Autor: Zoran Bukorac
+Datum: 06.06.2021. */
+
 #include "IR.h"
 #include "Function.h"
 #include "Label.h"

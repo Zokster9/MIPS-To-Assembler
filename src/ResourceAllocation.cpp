@@ -1,3 +1,6 @@
+/* Autor: Zoran Bukorac
+Datum: 06.06.2021. */
+
 #include "ResourceAllocation.h"
 
 void do_resource_allocation(InterferenceGraph* interference_graph, std::stack<Variable*>* stack, vector<Regs>& regs)

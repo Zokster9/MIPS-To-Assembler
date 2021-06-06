@@ -1,6 +1,9 @@
 #ifndef __FINITE_STATE_MACHINE__
 #define __FINITE_STATE_MACHINE__
 
+/* Autor: Zoran Bukorac
+Datum: 06.06.2021. */
+
 #include <map>
 #include <string>
 

@@ -1,6 +1,9 @@
 #ifndef __TOKEN__
 #define __TOKEN__
 
+/* Autor: Zoran Bukorac
+Datum: 06.06.2021. */
+
 #include <vector>
 #include <string>
 

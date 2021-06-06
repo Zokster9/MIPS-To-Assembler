@@ -1,4 +1,8 @@
 #pragma once
+
+/* Autor: Zoran Bukorac
+Datum: 06.06.2021. */
+
 #include <string>
 
 class Function

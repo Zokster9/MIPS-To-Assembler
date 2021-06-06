@@ -1,6 +1,9 @@
 #ifndef __IR__
 #define __IR__
 
+/* Autor: Zoran Bukorac
+Datum: 06.06.2021. */
+
 #include "Types.h"
 #include <ostream>
 

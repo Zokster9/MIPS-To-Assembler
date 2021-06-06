@@ -1,6 +1,9 @@
 #ifndef __RESOURCE_ALLOCATION__
 #define __RESOURCE_ALLOCATION__
 
+/* Autor: Zoran Bukorac
+Datum: 06.06.2021. */
+
 #include "IR.h"
 #include "InterferenceGraph.h"
 
